@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Feliz Aniversario ❤️</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      transition: background-image 1s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ffd6e0;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+      margin-bottom: 20px;
+    }
+
+    #mensaje {
+      font-size: 1.8rem;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      max-width: 600px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.8);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    .corazon {
+      position: absolute;
+      font-size: 2rem;
+      color: #ff4d6d;
+      animation: flotar 4s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes flotar {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Feliz 1 año juntos AMOR MIO 💖</h1>
+  <p>Toca cualquier tecla para descubrir un motivo por el que te amo...</p>
+  <div id="mensaje">✨</div>
+
+  <script>
+    const mensajes = [
+      "Gracias por hacerme feliz cada dia 🥰",
+      "Teamo mi chiquibeby ❤️",
+      "Espero sean muchos años mas 💝",
+      "Siempre vas hacer mi bebe 💕",
+      "Y mi qlona 💕",
+      "Tus ojos me namoran cada dia mas 🌟",
+      "Tu risa es mi sonido favorito ❤",
+      "Nunca me canso de mirarte putita🥰💝",
+      "Quiero mil años más con vos o fusionarme con vos😎",
+      "Gracias por aguantarme amor💖"
+    ];
+
+    // Lista de fotos con ambas extensiones posibles
+    const fondos = [];
+    for (let i = 1; i <= 9; i++) {
+      // intenta primero .jpeg, si no existe, .jpg
+      fondos.push(`fotos/foto${i}.jpeg`);
+      fondos.push(`fotos/foto${i}.jpg`);
+    }
+
+    const mensajeDiv = document.getElementById("mensaje");
+    let index = 0;
+
+    document.addEventListener("keydown", () => {
+      // Mensaje random
+      const randomIndex = Math.floor(Math.random() * mensajes.length);
+      mensajeDiv.textContent = mensajes[randomIndex];
+
+      // Fondo rotativo seguro
+      let fondoActual = fondos[index];
+      const img = new Image();
+      img.src = fondoActual;
+      img.onload = () => {
+        document.body.style.backgroundImage = `url(${fondoActual})`;
+      };
+
+      index = (index + 1) % fondos.length;
+
+      crearCorazon();
+    });
+
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.textContent = "❤️";
+      corazon.style.left = Math.random() * window.innerWidth + "px";
+      corazon.style.bottom = "0px";
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
